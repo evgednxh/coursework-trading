@@ -1,0 +1,84 @@
+.home-container {
+    margin: 0 auto;
+    max-width: 1000px;
+}
+
+/* header */
+.header {
+    height: 80px;
+}
+
+.header > .home-container {
+    width: 100%;
+}
+
+.header__list > :not(:last-child) {
+    margin-right: 20px;
+}
+
+.header__link {
+    color: #000;
+}
+
+.header__text {
+    line-height: 80px;
+}
+
+/* stock list*/
+.stock-section {
+    padding-top: 100px;
+}
+
+.stock-heading {
+    margin-bottom: 50px;
+}
+
+.stock-list > :not(:last-child) {
+    margin-bottom: 20px;
+}
+
+.stock-list__item {
+    padding: 20px 0;
+}
+
+/* popup */
+.stock-buy-popup {
+    z-index: 1;
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, .5);
+}
+
+.stock-buy-popup.hidden {
+    display: none;
+}
+
+.stock-buy-popup__card {
+    z-index: 999;
+    min-width: 500px;
+    background-color: #fff;
+    padding: 30px;
+}
+
+.stock-buy-popup__form > :not(:last-child) {
+    margin-bottom: 20px;
+}
+
+.stock-buy-popup__heading {
+    margin-bottom: 30px;
+}
+
+.stock-buy-popup__label {
+    margin-bottom: 5px;
+}
+
+.stock-buy-popup__input {
+    background-color: transparent;
+}
+
+.stock-buy-popup__btn {
+    width: 100%;
+}
