@@ -42,6 +42,20 @@ public class UserRepositoryImpl implements UserRepository {
     }
 
     @Override
+    public void updateUserTokenByEmail(String email, String token) {
+        Session session = sessionFactory.openSession();
+        Transaction tx = session.beginTransaction();
+
+        String hqlQuery = "update User u set u.accessToken = :token where u.email = :email";
+        session.createQuery(hqlQuery)
+                .setParameter("email", email)
+                .setParameter("token", token)
+                .executeUpdate();
+        tx.commit();
+        session.close();
+    }
+
+    @Override
     public void updateUserToken(String token) {
         Session session = sessionFactory.getCurrentSession();
         Transaction tx = session.beginTransaction();
@@ -67,6 +81,20 @@ public class UserRepositoryImpl implements UserRepository {
                 .executeUpdate();
 //        tx.commit();
 //        session.close();
+    }
+
+    @Override
+    public User getByEmail(String email, String username) {
+        Session session = sessionFactory.getCurrentSession();
+
+        Query query = session.createQuery("from User u where u.email = :email");
+        query.setParameter("email", email);
+        List<User> result = (ArrayList<User>) query.list();
+        if(result.size() == 0) {
+            return null;
+        }
+        User user = (User) result.get(0);
+        return user;
     }
 
 //    @Override

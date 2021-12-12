@@ -25,7 +25,12 @@ public class UserServiceImpl implements UserService {
     @Override
     @Transactional
     public String authorize(User user) {
-        // todo: check if such user already exists
+        // check if such user already exists
+        User foundUser = userRepository.getByEmail(user.getEmail(), user.getUsername());
+        if(foundUser != null) {
+            // send error that user already exist
+            return null;
+        }
         String token = this.generateRandomHash();
         user.setAccessToken(token);
         userRepository.add(user);
@@ -33,6 +38,26 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    @Transactional
+    public String login(User user) {
+        // check if such user already exists
+        User foundUser = userRepository.getByEmail(user.getEmail(), user.getUsername());
+        if(foundUser == null) {
+            // send error that user already exist
+            return null;
+        }
+        if(!user.getPassword().equals(foundUser.getPassword())) {
+            return null;
+        }
+
+        String token = this.generateRandomHash();
+        userRepository.updateUserTokenByEmail(user.getEmail(), token);
+        // TODO: refresh access token
+        return token;
+    }
+
+    @Override
+    @Transactional
     public String signOut(String token) {
         // update user - remove access token from db
         // redirect to sign in page

@@ -5,6 +5,7 @@ import com.holmanskih.obsidere.model.User;
 
 public interface UserService {
     String authorize(User user);
+    String login(User user);
     String signOut(String token);
     User getUserData();
     User getUserByToken(String token);

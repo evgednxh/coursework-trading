@@ -62,3 +62,11 @@ a {
 .spacing-top-l {
     margin-top: 20px
 }
+
+.full-height {
+    height: 100vh;
+}
+
+.text-center {
+    text-align: center;
+}

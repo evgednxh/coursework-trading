@@ -30,9 +30,15 @@ public class UserController {
     }
 
     @GetMapping("/auth")
-    public String middleware(Model model) {
+    public String auth(Model model) {
         model.addAttribute("user", new User());
         return "auth";
+    }
+
+    @GetMapping("/login")
+    public String login(Model model) {
+        model.addAttribute("user", new User());
+        return "login";
     }
 
     @GetMapping("/")
@@ -52,22 +58,44 @@ public class UserController {
     }
 
     @PostMapping("/signIn")
-    public RedirectView signIn(@ModelAttribute("user") User user, HttpServletResponse response, BindingResult result) {
+    public String signIn(@ModelAttribute("user") User user, HttpServletResponse response, BindingResult result) {
         if(result.hasErrors()) {
             logger.error("sign in err", result.getAllErrors());
-            return new RedirectView("error");
+            return "redirect:/error";
         }
         String accessToken = userService.authorize(user);
+        if(accessToken == null) {
+            return "error_auth";
+        }
+
         Cookie cookie = new Cookie(ACCESS_TOKEN_COOKIE_NAME, accessToken);
         response.addCookie(cookie);
-        return new RedirectView("home");
+        return "redirect:/home";
+    }
+
+    @PostMapping("/login/user")
+    public RedirectView loginUser(@ModelAttribute("user") User user, HttpServletResponse response, BindingResult result) {
+        if(result.hasErrors()) {
+            logger.error("log in err", result.getAllErrors());
+            return new RedirectView("error");
+        }
+        String accessToken = userService.login(user);
+        logger.info("accessToken " + accessToken);
+        if(accessToken == null) {
+            return new RedirectView("error_login");
+        }
+
+        Cookie cookie = new Cookie(ACCESS_TOKEN_COOKIE_NAME, accessToken);
+        cookie.setPath("/");
+        response.addCookie(cookie);
+        return new RedirectView("/home");
     }
 
     @GetMapping("/signOut")
-    public RedirectView signIn(@ModelAttribute("user") User user, HttpServletResponse response) {
+    public RedirectView signOut(HttpServletResponse response) {
         Cookie cookie = new Cookie(ACCESS_TOKEN_COOKIE_NAME, null);
         cookie.setMaxAge(0);
         response.addCookie(cookie);
-        return new RedirectView("index");
+        return new RedirectView("/");
     }
 }

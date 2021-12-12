@@ -24,7 +24,49 @@
     </div>
 </header>
 <main>
-
+    <section class="stock-section home-container">
+        <h1 class="stock-heading">Investor profile</h1>
+        <div>
+            <div class="flex-column">
+                <div class="text text--semibold">Username</div>
+                <div class="text">${user.username}</div>
+            </div>
+            <div class="flex-column spacing-top-l">
+                <div class="text text--semibold">Email</div>
+                <div class="text">${user.email}</div>
+            </div>
+        </div>
+        <div id="payment-row">
+            <c:choose>
+                <c:when test="${user.payment != null}">
+                    <div class="spacing-top">
+                        <div class="text text--semibold">Your invistions</div>
+                        <c:forEach items="${stocksInfo}" var="stock">
+                            <li class="stock-list__item">
+                                <div class="flex-row flex--jc-sb flex--ai-c">
+                                    <div>${stock.tradeName}</div>
+                                    <div>${stock.marketName}</div>
+                                    <div>${stock.tradePrice}</div>
+                                </div>
+                            </li>
+                        </c:forEach>
+                    </div>
+                </c:when>
+                <c:otherwise>
+                    <div class="spacing-top">
+                        <div class="text text--semibold">Add payment card</div>
+                        <form:form action="/payment/new" method="post" modelAttribute="paymentInfo" class="auth__form">
+                            <div class="auth__form-row flex-column spacing-top-l">
+                                <label class="text text--semibold">Username</label>
+                                <form:input class="auth__input text" type="number" maxlength="16" minlength="16" placeholder="Enter your card number" path="cardNumber"/>
+                            </div>
+                            <button type="submit" class="btn text text--c-light">Next</button>
+                        </form:form>
+                    </div>
+                </c:otherwise>
+            </c:choose>
+        </div>
+    </section>
 </main>
 </body>
 </html>

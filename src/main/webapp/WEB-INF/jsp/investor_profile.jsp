@@ -42,6 +42,16 @@
                 <c:when test="${user.payment != null}">
                     <div class="spacing-top">
                         <div class="text text--semibold">Your invistions</div>
+                        <c:forEach items="${stocksInfo}" var="stock">
+                            <li class="stock-list__item">
+                                <div class="flex-row flex--jc-sb flex--ai-c">
+                                    <div>${stock.tradeName}</div>
+                                    <div>${stock.marketName}</div>
+                                    <div>${stock.tradePrice}</div>
+                                    <div>${stock.boughtAmount}</div>
+                                </div>
+                            </li>
+                        </c:forEach>
                     </div>
                 </c:when>
                 <c:otherwise>

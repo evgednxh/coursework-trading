@@ -37,6 +37,18 @@ public class StockServiceImpl implements StockService {
 
     @Override
     @Transactional
+    public List<SoldStock> getInvestorStocks(int userID) {
+        return soldStockRepository.getInvestorStocks(userID);
+    }
+
+    @Override
+    @Transactional
+    public List<SoldStock> getBusinessStocks(int userID) {
+        return soldStockRepository.getBusinessStocks(userID);
+    }
+
+    @Override
+    @Transactional
     public void buyStocks(SoldStock stock) {
         soldStockRepository.add(stock);
     }

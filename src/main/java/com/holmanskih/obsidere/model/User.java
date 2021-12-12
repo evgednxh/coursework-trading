@@ -79,11 +79,11 @@ public class User {
         this.password = password;
     }
 
-    public UserType getAccountType() {
-        return this.userType;
+    public UserType getUserType() {
+        return userType;
     }
 
-    public void setAccountType(UserType userType) {
+    public void setUserType(UserType userType) {
         this.userType = userType;
     }
 
