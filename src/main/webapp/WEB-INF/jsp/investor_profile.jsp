@@ -15,7 +15,7 @@
         <nav>
             <ul class="header__list flex-row">
                 <li class="header__text">
-                    <a class="header__link text" href="/profile">Profile</a>
+                    <a class="header__link text" href="/home">Home</a>
                 </li>
                 <li class="header__text">
                     <a class="auth__btn text text--c-light" href="/signOut">Sign out</a>
@@ -41,7 +41,7 @@
             <c:choose>
                 <c:when test="${user.payment != null}">
                     <div class="spacing-top">
-                        <div class="text text--semibold">Your invistions</div>
+                        <h1 class="stock-heading">Your investments</h1>
                         <c:forEach items="${stocksInfo}" var="stock">
                             <li class="stock-list__item">
                                 <div class="flex-row flex--jc-sb flex--ai-c">
@@ -56,11 +56,11 @@
                 </c:when>
                 <c:otherwise>
                     <div class="spacing-top">
-                        <div class="text text--semibold">Add payment card</div>
+                        <h1 class="stock-heading">Add payment card</h1>
                         <form:form action="/payment/new" method="post" modelAttribute="paymentInfo" class="auth__form">
                             <div class="auth__form-row flex-column spacing-top-l">
                                 <label class="text text--semibold">Username</label>
-                                <form:input class="auth__input text" type="number" maxlength="16" minlength="16" placeholder="Enter your card number" path="cardNumber"/>
+                                <form:input class="auth__input text" required="true"  type="text" maxlength="16" minlength="16" placeholder="Enter your card number" path="cardNumber"/>
                             </div>
                             <button type="submit" class="btn text text--c-light">Next</button>
                         </form:form>

@@ -26,9 +26,9 @@ submitBtn.addEventListener('click', (e) => {
             amount: amount.value,
         })
     })
-        .then(resp => resp.json())
-        .then(resp => console.log(resp))
-        .catch(err => console.log(err))
+        // .then(resp => resp.json())
+        // .then(resp => console.log(resp))
+        // .catch(err => console.log(err))
 })
 
 popup.addEventListener('click', (e) => {

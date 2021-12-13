@@ -1,3 +1,5 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -10,11 +12,10 @@
 <header class="header">
     <div class="home-container flex-row flex--jc-sb">
         <div class="header__text text">${user.username}</div>
-
         <nav>
             <ul class="header__list flex-row">
                 <li class="header__text">
-                    <a class="header__link text" href="/profile">Profile</a>
+                    <a class="header__link text" href="/home">Home</a>
                 </li>
                 <li class="header__text">
                     <a class="auth__btn text text--c-light" href="/signOut">Sign out</a>
@@ -36,29 +37,63 @@
                 <div class="text">${user.email}</div>
             </div>
         </div>
+        <div style="margin-top: 100px">
+            <h1 class="stock-heading">Create new business stock</h1>
+            <form:form action="/stock/new" method="post" modelAttribute="stock" class="auth__form">
+                <div class="auth__form-row flex-column">
+                    <label class="text text--semibold">Trade name</label>
+                    <form:input class="auth__input text" type="text" minlength="2" placeholder="TESL" path="tradeName" required="true"/>
+                </div>
+                <div class="auth__form-row flex-column">
+                    <label class="text text--semibold">Market name</label>
+                    <form:input class="auth__input text" type="text" minlength="2" placeholder="Tesla Inc." path="marketName" required="true"/>
+                </div>
+                <div class="auth__form-row flex-column">
+                    <label class="text text--semibold">Market name</label>
+                    <form:input class="auth__input text" type="number" min="1" placeholder="500" path="tradePrice" required="true"/>
+                </div>
+                <div class="auth__form-row flex-column">
+                    <label class="text text--semibold">Amount</label>
+                    <form:input class="auth__input text" type="number" min="1" placeholder="100 000" path="amount" required="true"/>
+                </div>
+                <button type="submit" class="auth__btn text text--c-light">Create</button>
+            </form:form>
+        </div>
         <div id="payment-row">
             <c:choose>
                 <c:when test="${user.payment != null}">
                     <div class="spacing-top">
-                        <div class="text text--semibold">Your invistions</div>
+                        <h1 class="stock-heading">Your sells</h1>
                         <c:forEach items="${stocksInfo}" var="stock">
                             <li class="stock-list__item">
                                 <div class="flex-row flex--jc-sb flex--ai-c">
                                     <div>${stock.tradeName}</div>
                                     <div>${stock.marketName}</div>
                                     <div>${stock.tradePrice}</div>
+                                    <div>${stock.boughtAmount}</div>
                                 </div>
                             </li>
                         </c:forEach>
+<%--                        <div class="text text--semibold">Your sells</div>--%>
+<%--                        <c:forEach items="${stocksInfo}" var="stock">--%>
+<%--                            <li class="stock-list__item">--%>
+<%--                                <div class="flex-row flex--jc-sb flex--ai-c">--%>
+<%--                                    <div>${stock.tradeName}</div>--%>
+<%--                                    <div>${stock.marketName}</div>--%>
+<%--                                    <div>${stock.tradePrice}</div>--%>
+<%--                                    <div>${stock.boughtAmount}</div>--%>
+<%--                                </div>--%>
+<%--                            </li>--%>
+<%--                        </c:forEach>--%>
                     </div>
                 </c:when>
                 <c:otherwise>
                     <div class="spacing-top">
-                        <div class="text text--semibold">Add payment card</div>
+                        <h1 class="stock-heading">Add payment card</h1>
                         <form:form action="/payment/new" method="post" modelAttribute="paymentInfo" class="auth__form">
                             <div class="auth__form-row flex-column spacing-top-l">
                                 <label class="text text--semibold">Username</label>
-                                <form:input class="auth__input text" type="number" maxlength="16" minlength="16" placeholder="Enter your card number" path="cardNumber"/>
+                                <form:input class="auth__input text" type="text" maxlength="16" minlength="16" placeholder="Enter your card number" path="cardNumber" required="true"/>
                             </div>
                             <button type="submit" class="btn text text--c-light">Next</button>
                         </form:form>

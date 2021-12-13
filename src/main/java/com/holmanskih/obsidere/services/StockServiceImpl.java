@@ -52,4 +52,10 @@ public class StockServiceImpl implements StockService {
     public void buyStocks(SoldStock stock) {
         soldStockRepository.add(stock);
     }
+
+    @Override
+    @Transactional
+    public void create(Stock stock) {
+        stockRepository.create(stock);
+    }
 }

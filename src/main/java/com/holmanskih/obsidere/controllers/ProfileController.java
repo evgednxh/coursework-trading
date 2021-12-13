@@ -1,10 +1,7 @@
 package com.holmanskih.obsidere.controllers;
 
 import com.holmanskih.obsidere.Utils;
-import com.holmanskih.obsidere.model.SoldStock;
-import com.holmanskih.obsidere.model.UserType;
-import com.holmanskih.obsidere.model.PaymentInfo;
-import com.holmanskih.obsidere.model.User;
+import com.holmanskih.obsidere.model.*;
 import com.holmanskih.obsidere.services.StockService;
 import com.holmanskih.obsidere.services.UserService;
 import org.slf4j.Logger;
@@ -46,6 +43,8 @@ public class ProfileController {
         }
 
         model.addAttribute("user", user);
+        model.addAttribute("stock", new Stock());
+
         if (user.getPayment() == null) {
             model.addAttribute("paymentInfo", new PaymentInfo());
         }
@@ -55,7 +54,6 @@ public class ProfileController {
             model.addAttribute("stocksInfo", stockList);
             return "investor_profile";
         } else {
-            // Todo: change the information in the sql table about sold amount of stocks
             List<SoldStock> stockList = stockService.getBusinessStocks(user.getId());
             model.addAttribute("stocksInfo", stockList);
             return "business_profile";

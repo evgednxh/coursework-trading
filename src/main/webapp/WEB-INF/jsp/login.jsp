@@ -18,15 +18,15 @@
                 <form:form action="/login/user" method="post" modelAttribute="user" class="auth__form">
                     <div class="auth__form-row flex-column">
                         <label class="text-heading-small text--semibold">Email</label>
-                        <form:input class="auth__input text" type="email" placeholder="Enter your email" path="email"/>
+                        <form:input class="auth__input text" type="email" placeholder="Enter your email" path="email" required="true"/>
                     </div>
                     <div class="auth__form-row flex-column">
                         <label class="text-heading-small text--semibold">Password</label>
-                        <form:input class="auth__input text" type="password" placeholder="Enter your password" path="password"/>
+                        <form:input class="auth__input text" type="password" placeholder="Enter your password" minlength="4" path="password" required="true"/>
                     </div>
                     <button type="submit" class="auth__btn text text--c-light">Log in</button>
                 </form:form>
-                <div>Dont have an account? <a href="/signIn">Sign in</a></div>
+                <div>Dont have an account? <a href="/">Sign in</a></div>
             </div>
         </div>
     </div>

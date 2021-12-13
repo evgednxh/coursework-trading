@@ -11,4 +11,5 @@ public interface StockService {
     List<SoldStock> getInvestorStocks(int userID);
     List<SoldStock> getBusinessStocks(int userID);
     void buyStocks(SoldStock stock);
+    void create(Stock stock);
 }

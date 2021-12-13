@@ -39,7 +39,7 @@ public class SoldStockRepositoryImpl implements SoldStockRepository {
     @Override
     public List<SoldStock> getBusinessStocks(int userID) {
         Session session = sessionFactory.getCurrentSession();
-        String hqlQuery =  "from SoldStock s where s.investor.id = :userID";
+        String hqlQuery =  "from SoldStock s where s.seller.id = :userID";
         List<SoldStock> result = (ArrayList<SoldStock>) session.createQuery(hqlQuery)
                 .setParameter("userID", userID)
                 .list();

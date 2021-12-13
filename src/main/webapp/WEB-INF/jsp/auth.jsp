@@ -18,18 +18,18 @@
                 <form:form action="/signIn" method="post" modelAttribute="user" class="auth__form">
                     <div class="auth__form-row flex-column">
                         <label class="text-heading-small text--semibold">Username</label>
-                        <form:input class="auth__input text" type="text" placeholder="Enter your username" path="username"/>
+                        <form:input class="auth__input text" type="text" minlength="4" placeholder="Enter your username" path="username" required="true"/>
                     </div>
                     <div class="auth__form-row flex-column">
                         <label class="text-heading-small text--semibold">Email</label>
-                        <form:input class="auth__input text" type="email" placeholder="Enter your email" path="email"/>
+                        <form:input class="auth__input text" type="email" placeholder="Enter your email" path="email" required="true"/>
                     </div>
                     <div class="auth__form-row flex-column">
                         <label class="text-heading-small text--semibold">Password</label>
-                        <form:input class="auth__input text" type="password" placeholder="Enter your password" path="password"/>
+                        <form:input class="auth__input text" type="password" minlength="4" placeholder="Enter your password" path="password" required="true"/>
                     </div>
                     <div class="auth__form-row flex-column">
-                        <label class="text-heading-small text--semibold">Password</label>
+                        <label class="text-heading-small text--semibold">Account type</label>
                         <form:select class="auth__input text" path="userType">
                             <option selected value="Investor">Investor</option>
                             <option value="BusinessOwner">Business owner</option>
